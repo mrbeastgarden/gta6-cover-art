@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Vice Cover Studio turns your photos and a caption into a multi-panel GTA-style poster, exported as a PNG. Works fully offline.">
+<title>Vice Cover Studio — GTA-style cover art maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="studio">
+  <section class="panel controls" aria-label="Cover editor controls">
+    <header class="brand">
+      <h1>VICE COVER <span>STUDIO</span></h1>
+      <p>Turn your photos into a bold multi-panel poster. Three steps: photo, layout, export.</p>
+    </header>
+
+    <section class="group" aria-label="Photos">
+      <h2><span class="step">1</span> Photos</h2>
+      <div class="tray" id="tray" role="listbox" aria-label="Photo tray"></div>
+      <div class="row">
+        <label class="upload">+ Add your photos
+          <input id="upload" type="file" accept="image/*" multiple>
+        </label>
+        <button id="fillAll" type="button" title="Fill every panel with the selected photo">Use in all panels</button>
+      </div>
+      <p class="hint">Click a photo, then click a panel on the cover to place it. Drag a panel to move its photo, scroll to zoom. Photos never leave your machine.</p>
+    </section>
+
+    <section class="group" aria-label="Layout">
+      <h2><span class="step">2</span> Layout</h2>
+      <div class="choices" id="layouts" role="group" aria-label="Panel layouts">
+        <button type="button" data-layout="hero">Hero · 1</button>
+        <button type="button" data-layout="split">Split · 2</button>
+        <button type="button" data-layout="comic">Comic · 3</button>
+        <button type="button" data-layout="grid">Grid · 4</button>
+      </div>
+    </section>
+
+    <section class="group" aria-label="Caption">
+      <h2><span class="step">3</span> Caption</h2>
+      <label class="field">Title
+        <input id="caption" type="text" maxlength="28" value="SUNSET HEIST" autocomplete="off">
+      </label>
+      <label class="field">Tagline
+        <input id="subcaption" type="text" maxlength="40" value="BOULEVARD NIGHTS · EST. 2026" autocomplete="off">
+      </label>
+      <div class="row sliders">
+        <label class="field">Title size
+          <input id="capSize" type="range" min="60" max="160" value="100">
+        </label>
+        <label class="field">Position
+          <select id="capPos">
+            <option value="bottom">Bottom</option>
+            <option value="top">Top</option>
+            <option value="middle">Middle</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section class="group" aria-label="Colour grade">
+      <h2><span class="step">4</span> Colour grade</h2>
+      <div class="choices grades" id="grades" role="group" aria-label="Colour grades">
+        <button type="button" data-grade="sunset"><i class="sw sunset"></i>Sunset</button>
+        <button type="button" data-grade="neon"><i class="sw neon"></i>Neon</button>
+        <button type="button" data-grade="noir"><i class="sw noir"></i>Noir</button>
+        <button type="button" data-grade="palm"><i class="sw palm"></i>Palm</button>
+      </div>
+    </section>
+
+    <section class="group" aria-label="Export">
+      <h2><span class="step">5</span> Export</h2>
+      <div class="choices sizes" id="sizes" role="group" aria-label="Export sizes">
+        <button type="button" data-size="1080x1080">Square<br>1080 × 1080</button>
+        <button type="button" data-size="1080x1350">Portrait<br>1080 × 1350</button>
+        <button type="button" data-size="1920x1080">Wide<br>1920 × 1080</button>
+      </div>
+      <button id="export" type="button" class="export">⬇ Export PNG</button>
+      <p id="status" role="status"></p>
+    </section>
+  </section>
+
+  <section class="stage" aria-label="Live cover preview">
+    <div class="stagebar">
+      <span id="panelLabel">Panel 1 of 3 — drag to move, scroll to zoom</span>
+      <span class="stageactions">
+        <button id="zoomOut" type="button" aria-label="Zoom photo out">−</button>
+        <button id="zoomIn" type="button" aria-label="Zoom photo in">+</button>
+        <button id="resetPanel" type="button">Reset photo</button>
+      </span>
+    </div>
+    <canvas id="cover" width="1080" height="1350" aria-label="Live cover preview"></canvas>
+    <p class="credit">Original artwork made from your photos. No game logos, art or fonts.</p>
+  </section>
+</main>
+<div id="verify" hidden></div>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
